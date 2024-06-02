@@ -1,7 +1,14 @@
 import React from 'react';
 import './CartPage.css';
 
-function CartPage({ cartItems, hideItemInCart }) {
+function CartPage({ cartItems, hideItemInCart, placeOrder }) {
+    const handleOrder = () => {
+        placeOrder();
+        alert('Ваш заказ был успешно оформлен!');
+    };
+
+    const totalAmount = cartItems.reduce((total, item) => item.hidden ? total : total + item.price, 0).toFixed(2);
+
     return (
         <div className="cart-container">
             <h2>Корзина</h2>
@@ -29,8 +36,11 @@ function CartPage({ cartItems, hideItemInCart }) {
                         ))}
                     </ul>
                     <p className="cart-total">
-                        Total: ${cartItems.reduce((total, item) => item.hidden ? total : total + item.price, 0).toFixed(2)}
+                        Total: ${totalAmount}
                     </p>
+                    <button className="order-button" onClick={handleOrder}>
+                        Купить
+                    </button>
                 </div>
             )}
         </div>

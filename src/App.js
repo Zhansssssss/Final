@@ -21,6 +21,9 @@ function App() {
             prevItems.map((item, i) => (i === index ? { ...item, hidden: true } : item))
         );
     };
+    const placeOrder = () => {
+        setCartItems(prevItems => prevItems.map(item => ({ ...item, hidden: true })));
+    };
 
     return (
         <Router>
@@ -32,7 +35,7 @@ function App() {
                     <Route path="/gallery" element={<GalleryPage />} />
                     <Route path="/product/:id" element={<ProductPage addToCart={addToCart} />} />
                     <Route path="/contact" element={<ContactPage />} />
-                    <Route path="/cart" element={<CartPage cartItems={cartItems} hideItemInCart={hideItemInCart} />} />
+                    <Route path="/cart" element={<CartPage cartItems={cartItems} hideItemInCart={hideItemInCart} placeOrder={placeOrder} />} />
                 </Routes>
                 <Footer />
             </div>
